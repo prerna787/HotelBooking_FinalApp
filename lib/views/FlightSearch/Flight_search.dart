@@ -1,28 +1,27 @@
 import 'package:booking_app/presentation/components/loader.dart';
 import 'package:booking_app/presentation/components/spacers.dart';
-import 'package:booking_app/views/HotelSearch/bloc/hotel_search_bloc.dart';
+import 'package:booking_app/views/FlightSearch/bloc/flight_search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../presentation/components/declarations/constants/constants.dart';
-
-class HotelSearchScreen extends StatelessWidget {
-  HotelSearchScreen({Key? key}) : super(key: key);
-  final TextEditingController _city = TextEditingController();
+class FlightSearchScreen extends StatelessWidget {
+  FlightSearchScreen({Key? key}) : super(key: key);
+  final TextEditingController _fromCity = TextEditingController();
+  final TextEditingController _toCity = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Search Hotels here!',
+          'Search Flights here!',
         ),
       ),
-      body: BlocConsumer<HotelSearchBloc, HotelSearchState>(
+      body: BlocConsumer<FlightSearchBloc, FlightSearchState>(
         listener: (context, state) {
           if (state is SearchLoaded) {
             Navigator.of(context)
-                .pushNamed('/list', arguments: state.hotelResponse);
-          } else if(state is NotFound){
+                .pushNamed('/flightList', arguments: state.flightResponse);
+          } else if (state is NotFound) {
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
@@ -36,7 +35,7 @@ class HotelSearchScreen extends StatelessWidget {
                     actions: [
                       IconButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/searchHotel');
+                          Navigator.of(context).pushNamed('/searchFlight');
                         },
                         icon: const Icon(Icons.mood_bad),
                         alignment: Alignment.center,
@@ -48,7 +47,7 @@ class HotelSearchScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is DashboardLoading) {
+          if (state is FlightLoading) {
             return LoadingWidget(
               child: initialLayout(context),
             );
@@ -68,16 +67,22 @@ class HotelSearchScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: _city,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.blue),
-                              borderRadius: kBorderRadius),
-                          hintText: 'Enter your city ',
-                          labelText: 'Choose your Destination'),
+                  child: TextFormField(
+                    controller: _fromCity,
+                    decoration: const InputDecoration(
+                      hintText: 'where',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: _toCity,
+                    decoration: const InputDecoration(
+                      hintText: 'to',
                     ),
                   ),
                 ),
@@ -86,8 +91,8 @@ class HotelSearchScreen extends StatelessWidget {
             const HeightSpacer(myHeight: 10.00),
             ElevatedButton(
                 onPressed: () {
-                  BlocProvider.of<HotelSearchBloc>(context)
-                      .add(Search(_city.text));
+                  BlocProvider.of<FlightSearchBloc>(context)
+                      .add(Search(_fromCity.text, _toCity.text));
                 },
                 child: const Text("Search")),
           ],

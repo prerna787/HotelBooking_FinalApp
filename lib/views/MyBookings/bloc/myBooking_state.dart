@@ -6,6 +6,8 @@ class BookingsInitial extends BookingsState {}
 
 class BookingsLoading extends BookingsState {}
 
+class NoBookings extends BookingsState {}
+
 class BookingsLoaded extends BookingsState {
   final List<BookingModel> bookings;
 

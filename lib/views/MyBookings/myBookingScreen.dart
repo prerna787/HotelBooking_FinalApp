@@ -39,9 +39,9 @@ class MyBookingsScreen extends StatelessWidget {
                         child: Card(
                           elevation: 10.0,
                           // shadowColor: Colors.blueGrey,
-                            color: (index % 2 == 0)
-                                ? const Color.fromARGB(255, 237, 241, 243)
-                                : const Color.fromARGB(255, 201, 201, 197),
+                          color: (index % 2 == 0)
+                              ? const Color.fromARGB(255, 237, 241, 243)
+                              : const Color.fromARGB(255, 201, 201, 197),
                           child: SingleChildScrollView(
                             child: Padding(
                                 padding: const EdgeInsets.symmetric(

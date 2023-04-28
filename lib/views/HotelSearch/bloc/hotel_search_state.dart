@@ -13,6 +13,8 @@ class SearchLoading extends HotelSearchState {}
 
 class SearchFailure extends HotelSearchState {}
 
+class NotFound extends HotelSearchState {}
+
 class SearchLoaded extends HotelSearchState {
   final List<HotelModel> hotelResponse;
   SearchLoaded({required this.hotelResponse});

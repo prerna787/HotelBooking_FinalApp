@@ -9,7 +9,7 @@ class BookingApi {
     String? token = await CacheNetwork.getCacheData(key: 'token');
     debugPrint(' taking token: ${token}');
     final response = await http.get(
-        Uri.parse('http://10.0.2.2:9000/booking/byUsername?username=ashish'),
+        Uri.parse('http://10.0.2.2:9090/booking/byUsername?username=ashish'),
         headers: {
           'Authorization': 'Bearer $token',
         });
@@ -17,7 +17,7 @@ class BookingApi {
     if (response.statusCode == 200) {
       debugPrint(response.body);
       final List<dynamic> jsonList = jsonDecode(response.body);
-      return jsonList.map((json) => BookingModel.fromJson(data:json)).toList();
+      return jsonList.map((json) => BookingModel.fromJson(data: json)).toList();
     } else {
       throw Exception('Failed to load bookings');
     }

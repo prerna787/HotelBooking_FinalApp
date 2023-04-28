@@ -26,9 +26,7 @@ class DashboardScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: Center(
-
         child: Column(
-
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             InkWell(
@@ -37,7 +35,6 @@ class DashboardScreen extends StatelessWidget {
                 Navigator.of(context).pushNamed('/searchHotel');
               },
               child: Card(
-
                 elevation: 10,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
@@ -73,6 +70,7 @@ class DashboardScreen extends StatelessWidget {
             InkWell(
               onTap: () {
                 // Handle flight option selection
+                Navigator.of(context).pushNamed('/searchFlight');
               },
               child: Card(
                 elevation: 10,

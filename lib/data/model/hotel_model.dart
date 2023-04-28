@@ -44,6 +44,7 @@ class HotelModel {
   String? get city => _city;
   set city(String? city) => _city = city;
   double? get pricePerNight => _pricePerNight;
+
   set pricePerNight(double? pricePerNight) => _pricePerNight = pricePerNight;
 
    HotelModel.fromJson(Map<String, dynamic> json ) {

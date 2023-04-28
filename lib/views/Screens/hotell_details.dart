@@ -19,8 +19,14 @@ class HotelDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Hotel Details '),
-          actions: [IconButton(onPressed: (){Navigator.of(context).pushNamed('/');}, icon: Icon(Icons.logout))],
+          title: const Text('Hotel Details '),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/');
+                },
+                icon: const Icon(Icons.logout))
+          ],
         ),
         body: BlocConsumer<BookingBloc, BookingState>(
           listener: (context, state) {
@@ -29,8 +35,8 @@ class HotelDetails extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("Success"),
-                      titleTextStyle: TextStyle(
+                      title: const Text("Success"),
+                      titleTextStyle: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 20),
@@ -40,11 +46,11 @@ class HotelDetails extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pushNamed('/dashboardScreen');
                           },
-                          icon: Icon(Icons.home),
+                          icon: const Icon(Icons.home),
                           alignment: Alignment.center,
                         ),
                       ],
-                      content: Text("Booking Successful"),
+                      content: const Text("Booking Successful"),
                     );
                   });
             }
@@ -63,51 +69,74 @@ class HotelDetails extends StatelessWidget {
 
   Widget initialLayout(BuildContext context) => Center(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 00, vertical: 150),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 00, vertical: 150),
           child: Card(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
+            elevation: 10,
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
                     'Hotel id:         ${hotelModel.id}',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  'Hotel Name:    ${hotelModel.name}',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),),
-                Text(
-                  'City :      ${hotelModel.city}',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),),
-                Text(
-                  'Price:     ${hotelModel.pricePerNight}',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),  ),
-                HeightSpacer(myHeight: 10),
-                Center(
-                    child: ElevatedButton(
-                  child: Text('Click to Book Hotel',style: TextStyle(fontSize: 20),),
-                  onPressed: () async {
-                    String? username =
-                        await CacheNetwork.getCacheData(key: 'username');
+                  Text(
+                    'Hotel Name:    ${hotelModel.name}',
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'City :      ${hotelModel.city}',
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'Price:     ${hotelModel.pricePerNight}',
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const HeightSpacer(myHeight: 10),
+                  Center(
+                      child: ElevatedButton(
+                    child: const Text(
+                      'Click to Book Hotel',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    onPressed: () async {
+                      String? username =
+                          await CacheNetwork.getCacheData(key: 'username');
 
-                    BlocProvider.of<BookingBloc>(context).add(SubmitForm(
-                        hotelId: '${hotelModel.id}',
-                        name: '${hotelModel.name}',
-                        userName: username!));
-                  },
-                ))
-              ],
+                      BlocProvider.of<BookingBloc>(context).add(SubmitForm(
+                          hotelId: '${hotelModel.id}',
+                          name: '${hotelModel.name}',
+                          userName: username!));
+                    },
+                  ))
+                ],
+              ),
             ),
           ),
         ),

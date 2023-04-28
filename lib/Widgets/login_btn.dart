@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:booking_app/views/Login/bloc//auth_bloc.dart';
-
 import 'package:booking_app/presentation/components/declarations/constants/constants.dart';
 
 class LoginBtn extends StatelessWidget {

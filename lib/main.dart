@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-
   await CacheNetwork.cacheInitialization();
   await CacheNetwork.deleteCacheItem(key: 'token');
   String? token = await CacheNetwork.getCacheData(key: 'token')  ;

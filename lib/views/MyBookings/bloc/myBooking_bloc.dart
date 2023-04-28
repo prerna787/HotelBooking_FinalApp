@@ -13,7 +13,11 @@ class BookingsBloc extends Bloc<BookingsEvent, BookingsState> {
       await Future.delayed(const Duration(milliseconds: 1000));
       debugPrint("booking Api is invoked...==========================?????");
       final bookings = await bookingApi.getBookings();
-      emit(BookingsLoaded(bookings: bookings));
+      if (bookings.isNotEmpty) {
+        emit(BookingsLoaded(bookings: bookings));
+      } else {
+        emit(NoBookings());
+      }
     });
   }
 }

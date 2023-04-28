@@ -4,12 +4,14 @@ class BookingModel {
   String? username;
   String? name;
   int? hotelId;
+  int? flightId;
 
   // Constructor
   BookingModel(
     this.username,
     this.name,
     this.hotelId,
+    this.flightId,
   );
 
   // Named constructor
@@ -19,7 +21,7 @@ class BookingModel {
     name = data['name'];
 
     hotelId = data['hotelId'];
-  }
 
-
+    flightId = data['flightId'];
   }
+}
